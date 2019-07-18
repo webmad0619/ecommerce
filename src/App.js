@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import Searchbar from './Searchbar';
 import ProductList from './ProductList';
 import ShoppingCart from './ShoppingCart';
+import axios from "axios";
 
 export default class App extends Component {
   movies = [
@@ -73,9 +74,25 @@ export default class App extends Component {
     this.state = {
       filterQuery: "",
       cart: [],
-      movies: this.movies,
-      filteredMovies: this.movies
+      movies: [],
+      filteredMovies: []
     }
+  }
+
+  componentDidMount() {
+    axios
+      .get("http://localhost:6969/movies")
+      .then(movies => {
+        this.movies = movies.data
+
+        this.setState({
+          ...this.state,
+          filterQuery: "",
+          cart: [],
+          movies: movies.data,
+          filteredMovies: movies.data
+        })
+      })
   }
 
   filterMovies(e) {
@@ -104,37 +121,37 @@ export default class App extends Component {
   }
 
   removeProductFromBasket(movieID) {
-    let newState = {...this.state}
+    let newState = { ...this.state }
     let cartItemIndex = 0;
 
-    for (var i = 0 ; i < newState.cart.length; i++) {
-      if (newState.cart[i].id === movieID)	{
+    for (var i = 0; i < newState.cart.length; i++) {
+      if (newState.cart[i].id === movieID) {
         cartItemIndex = i;
-        }
+      }
     }
     newState.cart.splice(cartItemIndex, 1)
-    
+
     this.setState(newState)
   }
 
   render() {
     return (
       <React.Fragment>
-        <ShoppingCart 
-          cart={this.state.cart} 
+        <ShoppingCart
+          cart={this.state.cart}
           getCartTotal={() => this.getCartTotal()}
-          removeProductFromBasket={(movieID) => this.removeProductFromBasket(movieID)}/>
+          removeProductFromBasket={(movieID) => this.removeProductFromBasket(movieID)} />
         <h1>Found {this.state.filteredMovies.length} movies</h1>
 
-        <Searchbar 
+        <Searchbar
           filterMovies={(e) => this.filterMovies(e)}
           filterQuery={this.state.filterQuery} />
 
 
-        <ProductList 
+        <ProductList
           filteredMovies={this.state.filteredMovies}
           addToCart={(movie) => this.addToCart(movie)} />
-       
+
       </React.Fragment>
     )
   }

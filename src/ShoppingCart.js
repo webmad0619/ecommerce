@@ -42,7 +42,7 @@ export default class ShoppingCart extends Component {
                         {
                             this.props.cart.map((cartItem) => <li key={cartItem.id}>{cartItem.name} {cartItem.price} $ <button onClick={() => this.props.removeProductFromBasket(cartItem.id)}>X</button></li>)
                         }
-                        <li key="9999999999999999"><button onClick={() => this.buy()}>Buy! :)</button></li>
+                        <li key="9999999999999999"><button onClick={() => this.buy()}  style={{"color": "red"}}>Buy! :)</button></li>
 
                         {/* {
                             //remember this is achieved by the toggleItems fn without this conditional rendering

@@ -1,0 +1,71 @@
+* {
+    box-sizing: border-box;
+}
+
+aside.shopping-cart {
+    background: grey;
+    padding: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
+}
+
+aside.shopping-cart .notification {
+    border-radius: 50%;
+    background: red;
+    color: white;
+    font-size: 10px;
+    height: 15px;
+    width: 15px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    left: -5px;
+    top: 0px;
+}
+
+aside.shopping-cart .cart-button {
+    border-radius: 50%;
+    height: 50px;
+    width: 50px;
+    background: url('https://image.flaticon.com/icons/svg/2/2772.svg') no-repeat;
+    background-size: 20px 20px;
+    background-position: center center;
+    padding: 10px;
+    border: 1px solid black;
+    transition: all 0.5s;
+    position: relative;
+    opacity: 1;
+}
+
+aside.shopping-cart .cart-button.disabled {
+    opacity: 0.2;
+    pointer-events: none;
+}
+
+aside.shopping-cart .cart-button:hover {
+    background-color: #AAA;
+    transition: all 0.5s;
+}
+
+aside.shopping-cart .cart-list {
+    position: absolute;
+    right: 0;
+    top: 60px;
+}
+
+aside.shopping-cart .cart-list li {
+    background: white;
+    border: 1px solid black;
+    padding: 5px;
+    -webkit-user-select: none;
+    /* Chrome all / Safari all */
+    -moz-user-select: none;
+    /* Firefox all */
+    -ms-user-select: none;
+    /* IE 10+ */
+    user-select: none;
+
+}
